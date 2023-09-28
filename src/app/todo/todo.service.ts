@@ -14,7 +14,7 @@ export class TodoService {
     return (await this.storage.get('todos')) || [];
   }
 
-  async saveTodos(todos: Todo[]) {
+  async saveTodos(todos: Todo[] | undefined) {
     if (!this.storageInitialised) await this.storage.create();
 
     return this.storage.set('todos', todos);

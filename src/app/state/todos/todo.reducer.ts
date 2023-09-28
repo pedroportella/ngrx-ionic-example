@@ -8,10 +8,12 @@ import {
 } from './todo.actions';
 import { Todo } from '../../todo/todo.model';
 
+export type TodoStatus = 'pending' | 'loading' | 'error' | 'success';
+
 export interface TodoState {
   todos: Todo[];
-  error: string;
-  status: 'pending' | 'loading' | 'error' | 'success';
+  error: string | null;
+  status: TodoStatus;
 }
 
 export const initialState: TodoState = {
@@ -34,18 +36,18 @@ export const todoReducer = createReducer(
     todos: state.todos.filter((todo) => todo.id !== id),
   })),
   // Trigger loading the todos
-  on(loadTodos, (state) => ({ ...state, status: 'loading' })),
+  on(loadTodos, (state) => ({ ...state, status: <TodoStatus>'loading' })),
   // Handle successfully loaded todos
   on(loadTodosSuccess, (state, { todos }) => ({
     ...state,
     todos: todos,
     error: null,
-    status: 'success',
+    status: <TodoStatus>'success',
   })),
   // Handle todos load failure
   on(loadTodosFailure, (state, { error }) => ({
     ...state,
     error: error,
-    status: 'error',
+    status: <TodoStatus>'error',
   }))
 );

@@ -17,7 +17,6 @@ import { TodoEffects } from './state/todos/todo.effects';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
